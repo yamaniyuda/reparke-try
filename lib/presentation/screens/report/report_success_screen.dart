@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reparke/config/theme/theme.dart';
+import 'package:reparke/presentation/screens/report/report_history_screen.dart';
 
 class ReportSuccessScreen extends StatelessWidget {
   const ReportSuccessScreen({Key? key}) : super(key: key);
@@ -50,7 +51,9 @@ class ReportSuccessScreen extends StatelessWidget {
         child: SizedBox(
           width: double.infinity,
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ReportHistoryScreen()));
+            },
             style: TextButton.styleFrom(
               backgroundColor: primaryColor,
               shape: RoundedRectangleBorder(

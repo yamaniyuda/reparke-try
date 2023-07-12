@@ -54,6 +54,7 @@ class ReportHistoryScreen extends StatelessWidget {
                                 color: Color(0xffCCCCCC)
                               )
                             ),
+                            margin: EdgeInsets.symmetric(vertical: 10),
                             child: Column(
                               children: [
                                 Container(
