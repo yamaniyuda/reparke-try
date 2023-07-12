@@ -42,7 +42,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Image.asset("assets/logo.png"),
+        automaticallyImplyLeading: false,
+        title: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Image.asset("assets/icon.png", width: 30)
+            ],
+          ),
+        ),
       ),
       body: BlocProvider(
         create: (context) => AuthBloc(),
@@ -235,7 +243,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               child: _loading == false ? const Text(
                                   "Daftar",
                                   style: TextStyle(
-                                      color: Colors.white
+                                      color: Colors.black54
                                   )
                               ) : LoadingAnimationWidget.prograssiveDots(
                                   color: Colors.white,

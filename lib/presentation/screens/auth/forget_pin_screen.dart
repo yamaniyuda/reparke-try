@@ -31,7 +31,15 @@ class _ForgetPinScreenState extends State<ForgetPinScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Image.asset("assets/logo.png"),
+        automaticallyImplyLeading: false,
+        title: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Image.asset("assets/icon.png", width: 30)
+            ],
+          ),
+        ),
       ),
       body: SafeArea(
         child: BlocProvider(
@@ -86,22 +94,6 @@ class _ForgetPinScreenState extends State<ForgetPinScreen> {
                               ),
                             ),
                             const SizedBox(height: 22,),
-
-                            RFormTextFieldWidget(
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "No telepon wajib diisi";
-                                }
-                                return null;
-                              },
-                              hintText: "Masukan No Telepon",
-                              onSaved: (value) {
-                                setState(() {
-                                  _telpField = value!;
-                                });
-                              },
-                            ),
-                            const SizedBox(height: 22,),
                             RFormTextFieldWidget(
                               hintText: "Masukan Email",
                               validator: (value) {
@@ -127,7 +119,8 @@ class _ForgetPinScreenState extends State<ForgetPinScreen> {
                             context.read<AuthBloc>().add(
                               AuthEventForgetPin(
                                 SendOTPResetPinPayload(
-                                  identity: _emailField
+                                  identity: _emailField,
+
                                 )
                               )
                             );
@@ -148,7 +141,7 @@ class _ForgetPinScreenState extends State<ForgetPinScreen> {
                           : const Text(
                             "Reset Pin",
                               style: TextStyle(
-                                color: Colors.white
+                                color: Colors.black54
                               )
                             ),
                       ),

@@ -51,7 +51,7 @@ class AuthDataSource extends RemoteDataSource {
 
   Future<String> sendOTPResetPin({ required SendOTPResetPinPayload payload }) async {
     final String response = await dioClient.postRequest(
-      "auth/reset-pin/send-otp?${Helper().mapToString("&", payload.toJson())}",
+      "auth/reset-pin/send-otp?type=email&${Helper().mapToString("&", payload.toJson())}",
       data: {},
       converter: (data) => data["message"]
     );

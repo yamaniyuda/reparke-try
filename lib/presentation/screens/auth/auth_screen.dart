@@ -42,7 +42,7 @@ class AuthScreen extends StatelessWidget {
             Flexible(
               fit: FlexFit.tight,
               child: Center(
-                child: Image.asset("assets/logo.png"),
+                child: Image.asset("assets/logo.png", width: 100, height: 100, fit: BoxFit.cover),
               )
             ),
             Container(
@@ -70,7 +70,7 @@ class AuthScreen extends StatelessWidget {
                     child: const Text(
                       "Login",
                       style: TextStyle(
-                        color: Colors.white
+                        color: Colors.black54
                       )
                     ),
                   ),
@@ -94,7 +94,7 @@ class AuthScreen extends StatelessWidget {
                     child: const Text(
                       "Daftar",
                       style: TextStyle(
-                          color: Colors.white
+                          color: Colors.black54
                       )
                     ),
                   ),

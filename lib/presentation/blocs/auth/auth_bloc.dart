@@ -16,7 +16,6 @@ import 'package:reparke/domain/entities/user_entity.dart';
 import 'package:reparke/domain/use_cases/auth/get_current_user_use_case.dart';
 import 'package:reparke/domain/use_cases/auth/new_pin_use_case.dart';
 import 'package:reparke/domain/use_cases/auth/send_otp_reset_pin_payload.dart';
-import 'package:reparke/domain/use_cases/auth/send_otp_use_case.dart';
 import 'package:reparke/domain/use_cases/auth/sign_in_use_case.dart';
 import 'package:reparke/domain/use_cases/auth/sign_up_use_case.dart';
 import 'package:reparke/domain/use_cases/auth/verify_reset_pin_use_case.dart';
@@ -43,7 +42,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       if (data == null) throw Error();
       emit(AuthStateVerifySignUpSuccess());
-    } catch (_) {
+    }  on DioException catch (e) {
+      emit(AuthStateFailed(e.response?.data["message"]));
+    }  catch (_) {
       emit(AuthStateFailed("Terjadi kesalahan silahkan coba lagi"));
     }
   }
@@ -55,6 +56,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       if (data == null) throw Error();
       emit(AuthStateResetPinSuccess());
+    }  on DioException catch (e) {
+      emit(AuthStateFailed(e.response?.data["message"]));
     } catch (_) {
       emit(AuthStateFailed("Terjadi kesalahan silahkan coba lagi"));
     }
@@ -67,14 +70,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       if (data == null) throw Error();
       emit(AuthStateForgetPinSuccess());
-    } catch (_) {
+    } on DioException catch (e) {
+      emit(AuthStateFailed(e.response?.data["message"]));
+    }  catch (_) {
       emit(AuthStateFailed("Terjadi kesalahan silahkan coba lagi"));
     }
   }
 
   Future<void> _doSignIn(AuthEventSignIn event, Emitter emit) async {
     try {
-      print("masuk sini");
       emit(AuthStateLoading());
       final UserEntity? currentUser = await GetCurrentUserUseCase().call();
 
@@ -82,13 +86,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         userId: currentUser!.userId
       ));
 
-      print(data);
       if (data == null) throw Error();
-
       emit(AuthStateSignInSuccess());
 
-    } on DioException catch (_) {
-      emit(AuthStateFailed("Wrong PIN"));
+    } on DioException catch (e) {
+      emit(AuthStateFailed(e.response?.data["message"]));
     } catch (_) {
       emit(AuthStateFailed("Terjadi kesalahan silahkan coba lagi"));
     }
@@ -101,7 +103,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (res == null) throw Error();
 
       emit(AuthStateSingUpSuccess());
-    } catch(_) {
+    } on DioException catch (e) {
+      emit(AuthStateFailed(e.response?.data["message"]));
+    }  catch(_) {
       emit(AuthStateFailed("Tidak dapat login silahkan coba lagi."));
     }
   }
@@ -116,7 +120,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final res = await VerifySignUpUseCase().call(data);
       if (res == null) throw Error();
       emit(AuthStateVerifySignUpSuccess());
-    } catch (_) {
+    } on DioException catch (e) {
+      emit(AuthStateFailed(e.response?.data["message"]));
+    }  catch (_) {
       emit(AuthStateFailed("Terjadi kesalahan silahkan coba lagi"));
     }
   }

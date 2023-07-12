@@ -37,7 +37,15 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Image.asset("assets/logo.png"),
+        automaticallyImplyLeading: false,
+        title: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Image.asset("assets/icon.png", width: 30)
+            ],
+          ),
+        ),
       ),
       body: SafeArea(
         child: BlocProvider(
@@ -176,7 +184,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           child: Text(
                             widget.isSignUp ? "Masuk" : "Lanjut",
                             style: const TextStyle(
-                              color: Colors.white
+                              color: Colors.black54
                             )
                           ),
                         ),

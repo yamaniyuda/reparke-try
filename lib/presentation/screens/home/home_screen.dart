@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reparke/presentation/screens/auth/auth.dart';
 import 'package:reparke/presentation/screens/report/report.dart';
+import 'package:reparke/presentation/screens/report/report_about_as_screen.dart';
+import 'package:reparke/presentation/screens/report/report_history_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -53,37 +55,99 @@ class HomeScreen extends StatelessWidget {
                   )
                 );
               },
-              child: Container(
-                height: 200,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/Frame 2.png"),
-                    fit: BoxFit.cover
+              child: Stack(
+                children: [
+                  Image.asset(
+                    "assets/Frame 4.png",
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    padding: EdgeInsets.all(20),
+                    child: Align(
+                      alignment: const Alignment(-1, 1),
+                      child: Text(
+                        "Laporkan",
+                        style: GoogleFonts.inter(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700
+                        ),
+                      ),
+                    ),
                   )
-                ),
+                ],
+              )
+            ),
+            const SizedBox(height: 18),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ReportHistoryScreen(),
+                  )
+                );
+              },
+              child: Stack(
+                children: [
+                  Image.asset(
+                    "assets/Frame 2.png",
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    padding: EdgeInsets.all(20),
+                    child: Align(
+                      alignment: const Alignment(1, 1),
+                      child: Text(
+                        "Histori Laporan",
+                        style: GoogleFonts.inter(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
             const SizedBox(height: 18),
-            Container(
-              height: 200,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/Frame 4.png"),
-                      fit: BoxFit.cover
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ReportAboutAsScreen(),
                   )
-              ),
-            ),
-            const SizedBox(height: 18),
-            Container(
-              height: 200,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/Frame 5.png"),
-                    fit: BoxFit.cover
+                );
+              },
+              child: Stack(
+                children: [
+                  Image.asset(
+                    "assets/Frame 5.png",
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    padding: EdgeInsets.all(20),
+                    child: Align(
+                      alignment: const Alignment(-1, 1),
+                      child: Text(
+                        "Tentang",
+                        style: GoogleFonts.inter(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700
+                        ),
+                      ),
+                    ),
                   )
+                ],
               ),
             ),
             const SizedBox(height: 18),

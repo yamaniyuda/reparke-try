@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:reparke/data/dtos/auth_dto.dart';
 import 'package:reparke/data/dtos/user_dto.dart';
 import 'package:reparke/data/mappers/auth_mapper.dart';
@@ -43,7 +44,7 @@ class AuthRepositoryImpl extends AuthRepository {
       );
       return data;
     } catch (_) {
-      return null;
+      rethrow;
     }
   }
 
@@ -53,7 +54,7 @@ class AuthRepositoryImpl extends AuthRepository {
       final String data = await remoteDataSource.sendOTPResetPin(payload: payload);
       return data;
     } catch (_) {
-      return null;
+      rethrow;
     }
   }
 
@@ -62,18 +63,13 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<AuthEntity?> signIn({required SignInPayload payload}) async {
     try {
-      print("ksfksa");
       final AuthDTO dataDTO = await remoteDataSource.signIn(payload: payload);
       final AuthEntity dataEntity = mapper.convert<AuthDTO, AuthEntity>(dataDTO);
-      print("lkfjlsadflasf");
-
       await localDataSource.storeAuth(dataDTO);
 
       return dataEntity;
-    } catch (e, f) {
-      print(e);
-      print(f);
-      return null;
+    } catch (_) {
+      rethrow;
     }
   }
 
@@ -85,7 +81,7 @@ class AuthRepositoryImpl extends AuthRepository {
       await localUserDataSource.storeUser(dataDTO);
       return dataEntity;
     } catch (_) {
-      return null;
+      rethrow;
     }
   }
 
@@ -95,7 +91,7 @@ class AuthRepositoryImpl extends AuthRepository {
       final String response = await remoteDataSource.verifySignUp(payload: payload);
       return response;
     } catch (_) {
-      return null;
+      rethrow;
     }
   }
 
@@ -105,7 +101,7 @@ class AuthRepositoryImpl extends AuthRepository {
       final String response = await remoteDataSource.resetPin(payload: payload);
       return response;
     } catch (_) {
-      return null;
+      rethrow;
     }
   }
 
@@ -118,7 +114,7 @@ class AuthRepositoryImpl extends AuthRepository {
       final UserEntity userEntity = userMapper.convert<UserDTO, UserEntity>(userDTO);
       return userEntity;
     } catch (_) {
-      return null;
+      rethrow;
     }
   }
 
@@ -128,7 +124,7 @@ class AuthRepositoryImpl extends AuthRepository {
       final String data = await remoteDataSource.newPin(payload: payload);
       return data;
     } catch (_) {
-      return null;
+      rethrow;
     }
   }
 
@@ -140,7 +136,7 @@ class AuthRepositoryImpl extends AuthRepository {
       await localDataSource.storeAuth(dataDTO);
       return dataEntity;
     } catch (_) {
-      return null;
+      rethrow;
     }
   }
 

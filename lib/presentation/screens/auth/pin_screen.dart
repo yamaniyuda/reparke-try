@@ -37,7 +37,15 @@ class _PinScreenState extends State<PinScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Image.asset("assets/logo.png"),
+        automaticallyImplyLeading: false,
+        title: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Image.asset("assets/icon.png", width: 30)
+            ],
+          ),
+        ),
       ),
       body: SafeArea(
         child: BlocProvider(
@@ -190,12 +198,12 @@ class _PinScreenState extends State<PinScreen> {
                               minimumSize: const Size.fromHeight(50)
                           ),
                           child: _isLoading ? LoadingAnimationWidget.prograssiveDots(
-                              color: Colors.white,
+                              color: Colors.black54,
                               size: 50
                           ) : Text(
                               widget.isSignIn ? "Masuk" : "Lanjut",
                               style: const TextStyle(
-                                  color: Colors.white
+                                  color: Colors.black54
                               )
                           ),
                         ),
