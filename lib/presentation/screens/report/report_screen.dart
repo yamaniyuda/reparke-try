@@ -187,13 +187,14 @@ class _ReportScreenState extends State<ReportScreen> {
                                 setState(() => image = value!);
                               });
                             },
+                            suffixIcon: Icon(Icons.car_crash),
                             validator: (value) {
                               if (value == null) {
                                 return "Gambar wajib diisi";
                               }
                               return null;
                             },
-                            hintText: "Upload Foto KTP/Password",
+                            hintText: "Upload Foto Kendaraan*",
                           ),
                           const SizedBox(height: 18),
                           RFormTextFieldWidget(

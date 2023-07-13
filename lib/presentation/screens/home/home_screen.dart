@@ -62,21 +62,21 @@ class HomeScreen extends StatelessWidget {
                     height: 200,
                     fit: BoxFit.cover,
                   ),
-                  Container(
-                    height: 200,
-                    width: double.infinity,
-                    padding: EdgeInsets.all(20),
-                    child: Align(
-                      alignment: const Alignment(-1, 1),
-                      child: Text(
-                        "Laporkan",
-                        style: GoogleFonts.inter(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700
-                        ),
-                      ),
-                    ),
-                  )
+                  // Container(
+                  //   height: 200,
+                  //   width: double.infinity,
+                  //   padding: EdgeInsets.all(20),
+                  //   child: Align(
+                  //     alignment: const Alignment(-1, 1),
+                  //     child: Text(
+                  //       "Laporkan",
+                  //       style: GoogleFonts.inter(
+                  //           fontSize: 20,
+                  //           fontWeight: FontWeight.w700
+                  //       ),
+                  //     ),
+                  //   ),
+                  // )
                 ],
               )
             ),
@@ -103,13 +103,13 @@ class HomeScreen extends StatelessWidget {
                     padding: EdgeInsets.all(20),
                     child: Align(
                       alignment: const Alignment(1, 1),
-                      child: Text(
-                        "Histori Laporan",
-                        style: GoogleFonts.inter(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700
-                        ),
-                      ),
+                      // child: Text(
+                      //   "Histori Laporan",
+                      //   style: GoogleFonts.inter(
+                      //     fontSize: 20,
+                      //     fontWeight: FontWeight.w700
+                      //   ),
+                      // ),
                     ),
                   )
                 ],
@@ -132,21 +132,21 @@ class HomeScreen extends StatelessWidget {
                     height: 200,
                     fit: BoxFit.cover,
                   ),
-                  Container(
-                    height: 200,
-                    width: double.infinity,
-                    padding: EdgeInsets.all(20),
-                    child: Align(
-                      alignment: const Alignment(-1, 1),
-                      child: Text(
-                        "Tentang",
-                        style: GoogleFonts.inter(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700
-                        ),
-                      ),
-                    ),
-                  )
+                  // Container(
+                  //   height: 200,
+                  //   width: double.infinity,
+                  //   padding: EdgeInsets.all(20),
+                  //   child: Align(
+                  //     alignment: const Alignment(-1, 1),
+                  //     child: Text(
+                  //       "Tentang",
+                  //       style: GoogleFonts.inter(
+                  //         fontSize: 20,
+                  //         fontWeight: FontWeight.w700
+                  //       ),
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
             ),

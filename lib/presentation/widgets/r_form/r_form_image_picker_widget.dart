@@ -5,6 +5,7 @@ class RFormImagePickerWidget extends StatefulWidget {
   late TextInputType? keyboardType;
   late String? Function(XFile?)? validator = (_) => null;
   late String? hintText;
+  late Widget? suffixIcon;
   late void Function(XFile?)? onSaved;
 
   RFormImagePickerWidget({
@@ -12,7 +13,8 @@ class RFormImagePickerWidget extends StatefulWidget {
     this.hintText,
     this.keyboardType,
     this.onSaved,
-    this.validator
+    this.validator,
+    this.suffixIcon
   }) : super(key: key);
 
   @override
@@ -89,7 +91,7 @@ class _RFormImagePickerWidgetState extends State<RFormImagePickerWidget> {
         controller: _controller,
         cursorColor: Colors.black54,
         decoration: InputDecoration(
-            suffixIcon: const Icon(Icons.camera_alt),
+            suffixIcon: widget.suffixIcon ?? Icon(Icons.camera_alt),
             hintText: widget.hintText,
             contentPadding: const EdgeInsets.all(12),
             border: OutlineInputBorder(

@@ -52,7 +52,13 @@ class ReportSuccessScreen extends StatelessWidget {
           width: double.infinity,
           child: TextButton(
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ReportHistoryScreen()));
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ReportHistoryScreen()
+                ),
+                (route) => true,
+              );
             },
             style: TextButton.styleFrom(
               backgroundColor: primaryColor,

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reparke/config/theme/theme.dart';
 import 'package:reparke/presentation/blocs/report/report_bloc.dart';
+import 'package:reparke/presentation/screens/home/home_screen.dart';
 
 class ReportHistoryScreen extends StatelessWidget {
   const ReportHistoryScreen({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class ReportHistoryScreen extends StatelessWidget {
           child: Row(
             children: [
               IconButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () => Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeScreen(),), (route) => false),
                   icon: Icon(Icons.arrow_back_rounded)
               ),
               Spacer(),
@@ -37,7 +38,7 @@ class ReportHistoryScreen extends StatelessWidget {
                   child: ListView(
                     children: [
                       Text(
-                        "Layanan Kami",
+                        "Histori Laporan",
                         style: GoogleFonts.inter(
                             fontSize: 28,
                             fontWeight: FontWeight.w500
@@ -69,14 +70,14 @@ class ReportHistoryScreen extends StatelessWidget {
                                       Row(
                                         children: [
                                           Text(
-                                            "A01/00${e.key + 1}/${currentDate.day}${currentDate.month}${currentDate.year}/${e.value.noPlat}",
+                                            "A01/00${e.key + 1}/${currentDate.day.toString().padLeft(2, '0')}${currentDate.month.toString().padLeft(2, '0')}${currentDate.year}/${e.value.noPlat}",
                                             style: GoogleFonts.inter(
                                               fontSize: 12,
                                             ),
                                           ),
                                           Spacer(),
                                           Text(
-                                            "${currentDate.day}-${currentDate.month}-${currentDate.year}",
+                                            "${currentDate.day.toString().padLeft(2, '0')}-${currentDate.month.toString().padLeft(2, '0')}-${currentDate.year}",
                                             style: GoogleFonts.inter(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w700

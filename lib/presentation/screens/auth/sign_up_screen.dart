@@ -145,7 +145,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   identity = value!;
                                 });
                               },
-                              hintText: "Masukan No KTP / Password*",
+                              hintText: "Masukan No KTP / Passport*",
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return "No KTP / Password wajib diisi";
@@ -166,7 +166,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 }
                                 return null;
                               },
-                              hintText: "Upload Foto KTP/Password",
+                              hintText: "Upload Foto KTP/Passport",
                             ),
                             const SizedBox(height: 18),
                             RFormTextFieldWidget(

@@ -31,7 +31,7 @@ class AuthScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    "Foto, Lapor, dan Tertib",
+                    "Foto, Lapor, Tertib & lancar",
                     style: GoogleFonts.inter(
                       fontWeight: FontWeight.w500,
                     ),
