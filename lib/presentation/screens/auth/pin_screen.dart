@@ -198,7 +198,7 @@ class _PinScreenState extends State<PinScreen> {
                               minimumSize: const Size.fromHeight(50)
                           ),
                           child: _isLoading ? LoadingAnimationWidget.prograssiveDots(
-                              color: Colors.black54,
+                              color: Colors.white,
                               size: 50
                           ) : Text(
                               widget.isSignIn ? "Masuk" : "Lanjut",

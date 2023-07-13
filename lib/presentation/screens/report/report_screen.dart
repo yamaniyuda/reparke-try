@@ -309,7 +309,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                   color: Colors.black54
                                 )
                             ) : LoadingAnimationWidget.prograssiveDots(
-                                color: Colors.black54,
+                                color: Colors.white,
                                 size: 50
                             ),
                           ),
