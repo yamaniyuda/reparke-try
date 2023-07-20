@@ -9,6 +9,7 @@ import 'package:reparke/config/theme/theme.dart';
 import 'package:reparke/data/payloads/sign_up_payload.dart';
 import 'package:reparke/presentation/blocs/auth/auth_bloc.dart';
 import 'package:reparke/presentation/screens/auth/otp_screen.dart';
+import 'package:reparke/presentation/screens/auth/pin_screen.dart';
 import 'package:reparke/presentation/widgets/r_alert_dialog/r_alert_dialog_widget.dart';
 import 'package:reparke/presentation/widgets/r_flush_bar/r_flush_bar_widget.dart';
 import 'package:reparke/presentation/widgets/r_form/r_form_image_picker_widget.dart';
@@ -47,7 +48,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              Image.asset("assets/icon.png", width: 30)
+              Image.asset("assets/logo.png", width: 30)
             ],
           ),
         ),
@@ -100,8 +101,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Text(
                               "Isi Data",
                               style: GoogleFonts.inter(
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w700
+                                color: blueColor,
+                                fontSize: 28,
+                                fontWeight: FontWeight.w700
                               ),
                             ),
                             const SizedBox(height: 18),
@@ -155,9 +157,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             const SizedBox(height: 18),
                             RFormImagePickerWidget(
-                              onSaved: (XFile? value) {
+                              onSaved: (List<XFile?> value) {
                                 setState(() {
-                                  identityDoc = value!;
+                                  identityDoc = value[0]!;
                                 });
                               },
                               validator: (value) {
@@ -183,6 +185,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 return null;
                               },
                             ),
+                            const SizedBox(height: 21),
+                            const Text("Masukan PIN Keamanan"),
                             const SizedBox(height: 18),
                             PinCodeTextField(
                               onSaved: (value) {
@@ -240,15 +244,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ),
                                   minimumSize: const Size.fromHeight(50)
                               ),
-                              child: _loading == false ? const Text(
+                              child: _loading == false ? Text(
                                   "Daftar",
-                                  style: TextStyle(
-                                      color: Colors.black54
+                                  style: GoogleFonts.inter(
+                                    color: blueColor,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700
                                   )
                               ) : LoadingAnimationWidget.prograssiveDots(
                                   color: Colors.white,
                                   size: 50
                               ),
+                            ),
+                            const SizedBox(height: 25),
+                            Container(
+                              alignment: Alignment.center,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PinScreen(onNext: () {}),
+                                    )
+                                  );
+                                },
+                                child: Text(
+                                  "Sudah punya akun ?",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w500,
+                                      decoration: TextDecoration.underline,
+                                      color: blueColor
+                                  ),
+                                ),
+                              )
                             ),
                           ],
                         )

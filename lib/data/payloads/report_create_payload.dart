@@ -9,7 +9,7 @@ class ReportCreatePayload extends Payload {
   final String? noPlat;
   final String? warna;
   final String? detail;
-  final XFile? image;
+  final List<XFile?>? image;
 
   ReportCreatePayload({
     this.tipeKendaraan,
@@ -44,7 +44,7 @@ class ReportCreatePayload extends Payload {
     String? noPlat,
     String? warna,
     String? detail,
-    XFile? image
+    List<XFile?>? image
   }) {
     return ReportCreatePayload(
       tipeKendaraan: tipeKendaraan ?? this.tipeKendaraan,

@@ -99,8 +99,9 @@ class _OtpScreenState extends State<OtpScreen> {
                           Text(
                             widget.isSignUp ? "Masukkan Kode OTP" : "Reset Pin",
                             style: GoogleFonts.inter(
-                                fontSize: 28,
-                                fontWeight: FontWeight.w700
+                              color: blueColor,
+                              fontSize: 28,
+                              fontWeight: FontWeight.w700
                             ),
                           ),
                           const SizedBox(height: 23),
@@ -139,8 +140,9 @@ class _OtpScreenState extends State<OtpScreen> {
                             child: const Text(
                               "Kirim Ulang Kode Otp?",
                               style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  fontWeight: FontWeight.w500
+                                color: blueColor,
+                                decoration: TextDecoration.underline,
+                                fontWeight: FontWeight.w500
                               ),
                             ),
                           )
@@ -183,8 +185,10 @@ class _OtpScreenState extends State<OtpScreen> {
                           ),
                           child: Text(
                             widget.isSignUp ? "Masuk" : "Lanjut",
-                            style: const TextStyle(
-                              color: Colors.black54
+                            style: GoogleFonts.inter(
+                              color: blueColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700
                             )
                           ),
                         ),

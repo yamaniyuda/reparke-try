@@ -42,7 +42,7 @@ class _PinScreenState extends State<PinScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              Image.asset("assets/icon.png", width: 30)
+              Image.asset("assets/logo.png", width: 30)
             ],
           ),
         ),
@@ -92,6 +92,12 @@ class _PinScreenState extends State<PinScreen> {
               if (state is AuthStateFailed) {
                 setState(() => _isLoading = false);
                 RFlushBarWidget.show(context, state.e);
+
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomeScreen()),
+                        (route) => false
+                );
               }
             },
             builder: (context, state) {
@@ -109,8 +115,9 @@ class _PinScreenState extends State<PinScreen> {
                           Text(
                             widget.isSignIn ? "Masuk" : "Reset Pin",
                             style: GoogleFonts.inter(
-                                fontSize: 28,
-                                fontWeight: FontWeight.w700
+                              color: blueColor,
+                              fontSize: 28,
+                              fontWeight: FontWeight.w700
                             ),
                           ),
                           const SizedBox(height: 23),
@@ -157,7 +164,8 @@ class _PinScreenState extends State<PinScreen> {
                               child: const Text(
                                 "Lupa Pin Anda ?",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w500
+                                  fontWeight: FontWeight.w500,
+                                  decoration: TextDecoration.underline
                                 ),
                               ),
                             )
@@ -202,8 +210,10 @@ class _PinScreenState extends State<PinScreen> {
                               size: 50
                           ) : Text(
                               widget.isSignIn ? "Masuk" : "Lanjut",
-                              style: const TextStyle(
-                                  color: Colors.black54
+                              style: GoogleFonts.inter(
+                                color: blueColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700
                               )
                           ),
                         ),
@@ -220,8 +230,9 @@ class _PinScreenState extends State<PinScreen> {
                           child: Text(
                             "Belum punya akun ?",
                             style: GoogleFonts.inter(
-                                fontWeight: FontWeight.w500,
-                                decoration: TextDecoration.underline
+                              fontWeight: FontWeight.w500,
+                              decoration: TextDecoration.underline,
+                              color: blueColor
                             ),
                           ),
                         )

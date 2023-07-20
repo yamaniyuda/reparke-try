@@ -8,7 +8,7 @@ class ReportDataSource extends RemoteDataSource {
   Future<ReportDTO> createReport({ required ReportCreatePayload payload }) async {
     late Map<String, dynamic> postDataParams = payload.toJson();
     final FormData formData = FormData.fromMap({
-      "image": await MultipartFile.fromFile(payload.image!.path, filename: payload.image!.name)
+      // "image": await MultipartFile.fromFile(payload.image!.path, filename: payload.image!.name)
     });
 
     postDataParams.remove("image");

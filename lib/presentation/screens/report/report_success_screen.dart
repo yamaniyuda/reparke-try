@@ -20,14 +20,15 @@ class ReportSuccessScreen extends StatelessWidget {
                 "Terima Kasih",
                 style: GoogleFonts.inter(
                   fontSize: 28,
+                  color: blueColor,
                   fontWeight: FontWeight.w700
                 ),
               ),
               SizedBox(height: 54),
-              Icon(Icons.check_circle_outline, color: Colors.green, size: 150),
+              Icon(Icons.check_circle_outline, color: blueColor, size: 150),
               SizedBox(height: 52),
               Text(
-                "“ Dengan Kontribusi Anda dalam Melaporkan Kesalahan atau Pelanggaran yang ada, anda telah menjadi seorang warga negara yang baik yang membantu perkembangan negara Indonesia ini “",
+                "“Dengan Kontribusi Anda dalam Melaporkan Kesalahan atau Pelanggaran yang ada, anda telah menjadi seorang warga negara yang baik yang membantu perkembangan negara Indonesia ini “",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
                   fontSize: 16,
@@ -36,7 +37,7 @@ class ReportSuccessScreen extends StatelessWidget {
               ),
               SizedBox(height: 32),
               Text(
-                "Regards - Reparke",
+                "Regards - LAPA",
                 style: GoogleFonts.inter(
                   fontStyle: FontStyle.italic,
                   fontSize: 16,
@@ -71,8 +72,8 @@ class ReportSuccessScreen extends StatelessWidget {
             child: Text(
               "Cek History",
               style: GoogleFonts.inter(
-                color: Colors.black54,
-                fontSize: 16,
+                color: blueColor,
+                fontSize: 20,
                 fontWeight: FontWeight.w700
               ),
             ),

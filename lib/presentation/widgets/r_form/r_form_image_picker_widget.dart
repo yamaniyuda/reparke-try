@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+enum TypePicker { single, multiple }
+
 class RFormImagePickerWidget extends StatefulWidget {
   late TextInputType? keyboardType;
-  late String? Function(XFile?)? validator = (_) => null;
+  late String? Function(List<XFile?>)? validator = (_) => null;
   late String? hintText;
   late Widget? suffixIcon;
-  late void Function(XFile?)? onSaved;
+  late int? maxLines;
+  late TypePicker? typePicker;
+  late void Function(List<XFile?>)? onSaved;
 
   RFormImagePickerWidget({
     Key? key,
+    this.typePicker = TypePicker.single,
     this.hintText,
     this.keyboardType,
     this.onSaved,
+    this.maxLines,
     this.validator,
     this.suffixIcon
   }) : super(key: key);
@@ -24,7 +30,16 @@ class RFormImagePickerWidget extends StatefulWidget {
 class _RFormImagePickerWidgetState extends State<RFormImagePickerWidget> {
   final ImagePicker picker = ImagePicker();
   final TextEditingController _controller = TextEditingController();
-  late XFile? _picture = null;
+  late List<XFile?> _picture = [];
+
+  void _showPicker() async {
+    if (widget.typePicker == TypePicker.single) {
+      _showOptionSelectPicture();
+    } else {
+      _picture = await picker.pickMultiImage();
+      _controller.text = _picture.fold("", (value, element) => "$value${value.isNotEmpty ? '\n' : ''}${element!.name}") as String;
+    }
+  }
 
   void _showOptionSelectPicture() {
     showModalBottomSheet(
@@ -41,8 +56,10 @@ class _RFormImagePickerWidgetState extends State<RFormImagePickerWidget> {
               children: [
                 GestureDetector(
                   onTap: () => setState(() async {
-                    _picture = await picker.pickImage(source: ImageSource.camera);
-                    _controller.text = _picture!.name;
+                    _picture.add(
+                      await picker.pickImage(source: ImageSource.camera)
+                    );
+                    _controller.text = _picture[0]!.name;
                     Navigator.pop(context);
                   }),
                   child: const Column(
@@ -54,8 +71,8 @@ class _RFormImagePickerWidgetState extends State<RFormImagePickerWidget> {
                 ),
                 GestureDetector(
                   onTap: () => setState(() async {
-                    _picture = await picker.pickImage(source: ImageSource.gallery);
-                    _controller.text = _picture!.name;
+                    _picture.add(await picker.pickImage(source: ImageSource.gallery));
+                    _controller.text = _picture[0]!.name;
                     Navigator.pop(context);
                   }),
                   child: const Column(
@@ -75,19 +92,20 @@ class _RFormImagePickerWidgetState extends State<RFormImagePickerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FormField<XFile?>(
+    return FormField<List<XFile?>>(
       onSaved: (_) => widget.onSaved!(_picture),
       validator: (_) {
-        if (_picture != null) {
+        if (_picture.isEmpty) {
           return null;
         }
         return widget.validator!(_picture);
       },
       builder: (field) => TextFormField(
         onTap: () {
-          _showOptionSelectPicture();
+          _showPicker();
         },
         readOnly: true,
+        maxLines: null,
         controller: _controller,
         cursorColor: Colors.black54,
         decoration: InputDecoration(

@@ -5,6 +5,7 @@ class RFormTextFieldWidget extends StatelessWidget {
   final String? Function(String?)? validator;
   final String? hintText;
   final int? maxLines;
+  final Widget? suffixIcon;
   final void Function(String?)? onSaved;
 
   const RFormTextFieldWidget({
@@ -12,6 +13,7 @@ class RFormTextFieldWidget extends StatelessWidget {
     this.validator,
     this.keyboardType,
     this.hintText,
+    this.suffixIcon,
     this.onSaved,
     this.maxLines
   }) : super(key: key);
@@ -25,6 +27,7 @@ class RFormTextFieldWidget extends StatelessWidget {
       cursorColor: Colors.black54,
       maxLines: maxLines,
       decoration: InputDecoration(
+        suffixIcon: suffixIcon,
         hintText: hintText,
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(

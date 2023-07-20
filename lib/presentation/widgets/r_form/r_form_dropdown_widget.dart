@@ -5,8 +5,8 @@ class RFormDropDownWidget extends StatefulWidget {
   final String? Function(String?)? validator;
   final String? hintText;
   final List<String> items;
-  final void Function(String?)? onChange;
   final int? maxLines;
+  final void Function(String?)? onChange;
   final void Function(String?)? onSaved;
 
   const RFormDropDownWidget({

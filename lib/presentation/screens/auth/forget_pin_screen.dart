@@ -36,7 +36,7 @@ class _ForgetPinScreenState extends State<ForgetPinScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              Image.asset("assets/icon.png", width: 30)
+              Image.asset("assets/logo.png", width: 30)
             ],
           ),
         ),
@@ -90,7 +90,8 @@ class _ForgetPinScreenState extends State<ForgetPinScreen> {
                               "Reset Pin",
                               style: GoogleFonts.inter(
                                   fontSize: 28,
-                                  fontWeight: FontWeight.w500
+                                  color: blueColor,
+                                  fontWeight: FontWeight.w700
                               ),
                             ),
                             const SizedBox(height: 22,),
@@ -138,10 +139,12 @@ class _ForgetPinScreenState extends State<ForgetPinScreen> {
                               color: Colors.white,
                               size: 50
                             )
-                          : const Text(
+                          : Text(
                             "Reset Pin",
-                              style: TextStyle(
-                                color: Colors.black54
+                              style: GoogleFonts.inter(
+                                fontWeight: FontWeight.w700,
+                                color: blueColor,
+                                fontSize: 20
                               )
                             ),
                       ),

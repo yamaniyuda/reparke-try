@@ -33,7 +33,7 @@ class _ReportScreenState extends State<ReportScreen> {
   late String vehicleRype;
   late String chooseMerk;
   late String locationReport;
-  late XFile image;
+  late List<XFile?> image;
   late String reasonReport;
   late String noPlat;
   late String warna;
@@ -53,7 +53,7 @@ class _ReportScreenState extends State<ReportScreen> {
                   icon: Icon(Icons.arrow_back_rounded)
               ),
               Spacer(),
-              Image.asset("assets/icon.png", width: 30)
+              Image.asset("assets/logo.png", width: 30)
             ],
           ),
         ),
@@ -88,234 +88,315 @@ class _ReportScreenState extends State<ReportScreen> {
             },
             builder: (context, state) {
               return Form(
-                    key: _formKey,
-                      child: ListView(
-                        padding: const EdgeInsets.all(31),
-                        children: [
-                          Text(
-                            "Laporkan",
-                            style: GoogleFonts.inter(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w700
-                            ),
-                          ),
-                          const SizedBox(height: 18),
-                          Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Color(0xffFFD19F),
-                              borderRadius: BorderRadius.circular(10)
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(Icons.warning_amber_rounded, color: Color(0xffFBBC04), size: 40,),
-                                Flexible(
-                                  child: Text(
-                                    "Pastikan anda telah berusaha untuk menyelesaikan masalah dengan berbicara dengan pemilik kendaraan yang mau dilapor sebelum melaporkan. Bila mereka bisa bekerja sama, Anda tidak perlu melaporkan",
-                                    overflow: TextOverflow.clip,
-                                    style: GoogleFonts.inter(
-                                        fontSize: 10
+                key: _formKey,
+                  child: ListView(
+                    padding: const EdgeInsets.all(31),
+                    children: [
+                      Text(
+                        "Laporkan",
+                        style: GoogleFonts.inter(
+                          fontSize: 28,
+                          fontWeight: FontWeight.w700,
+                          color: blueColor
+                        ),
+                      ),
+                      const SizedBox(height: 18),
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Color(0xffFFD19F),
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.warning_amber_rounded, color: Color(0xffFBBC04), size: 40,),
+                            const SizedBox(width: 10,),
+                            Flexible(
+                              child: RichText(
+                                text: TextSpan(
+                                  style: GoogleFonts.inter(
+                                    fontSize: 12,
+                                    color: Colors.black54
+                                  ),
+                                  children: [
+                                    const TextSpan(
+                                      text: "Pastikan anda telah berusaha untuk menyelesaikan masalah dengan berbicara dengan pemilik kendaraan yang mau dilapor sebelum melaporkan. Bila mereka bisa bekerja sama,",
                                     ),
-                                  )
-                                )
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 18),
-                          RFormDropDownWidget(
-                            onSaved: (value) {
-                              setState(() => vehicleRype = value!);
-                            },
-                            onChange: (value) {
-                              switch (value) {
-                                case "Motor": {
-                                  setState(() => currendDataMerek = dataMerek[0]);
-                                  break;
-                                }
-                                case "Mobil": {
-                                  setState(() => currendDataMerek = dataMerek[1]);
-                                  break;
-                                }
-                                case "Truk": {
-                                  setState(() => currendDataMerek = dataMerek[2]);
-                                  break;
-                                }
-                              }
-                            },
-                            hintText: "Pilih Tipe Kendaraan",
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please enter some text";
-                              }
-                              return null;
-                            },
-                            items: const ["Motor", "Mobil", "Truk"]
-                          ),
-                          const SizedBox(height: 18),
-                          RFormDropDownWidget(
+                                    TextSpan(
+                                      text: "Anda tidak perlu melaporkan",
+                                      style: GoogleFonts.inter(
+                                        fontWeight: FontWeight.bold
+                                      )
+                                    )
+                                  ]
+                                ),
+                              )
+                            )
+                            // overflow: TextOverflow.clip,
+                            // style: GoogleFonts.inter(
+                            //     fontSize: 12
+                            // ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 18),
+                      RFormDropDownWidget(
+                        onSaved: (value) {
+                          setState(() => vehicleRype = value!);
+                        },
+                        onChange: (value) {
+                          switch (value) {
+                            case "Motor": {
+                              setState(() => currendDataMerek = dataMerek[0]);
+                              break;
+                            }
+                            case "Mobil": {
+                              setState(() => currendDataMerek = dataMerek[1]);
+                              break;
+                            }
+                            case "Truk": {
+                              setState(() => currendDataMerek = dataMerek[2]);
+                              break;
+                            }
+                          }
+                        },
+                        hintText: "Pilih Tipe Kendaraan",
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter some text";
+                          }
+                          return null;
+                        },
+                        items: const ["Motor", "Mobil", "Truk"]
+                      ),
+                      const SizedBox(height: 18),
+                      RFormTextFieldWidget(
+                        onSaved: (value) {
+                          setState(() {
+                            print(value);
+                            setState(() => reasonReport = value!);
+                          });
+                        },
+                        hintText: "Alasan Melapor*",
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter some text";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 18),
+                      RFormImagePickerWidget(
+                        onSaved: (List<XFile?> value) {
+                          setState(() {
+                            setState(() => image = value!);
+                          });
+                        },
+                        suffixIcon: Icon(Icons.car_crash),
+                        validator: (value) {
+                          if (value == null) {
+                            return "Gambar wajib diisi";
+                          }
+                          return null;
+                        },
+                        typePicker: TypePicker.multiple,
+                        hintText: "Upload Foto Kendaraan*",
+                        maxLines: 100,
+                      ),
+                      const SizedBox(height: 18),
+                      RFormTextFieldWidget(
+                        onSaved: (value) {
+                          setState(() {
+                            setState(() => locationReport = value!);
+                          });
+                        },
+                        suffixIcon: const Icon(Icons.location_on),
+                        hintText: "Lokasi Kejadian*",
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter some text";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 18),
+                      Row(
+                        children: [
+                          Flexible(
+                            flex: 5,
+                            fit: FlexFit.tight,
+                            child: RFormTextFieldWidget(
                               onSaved: (value) {
-                                setState(() => chooseMerk = value!);
+                                setState(() {
+                                  noPlat = value!;
+                                });
                               },
-                              hintText: "Pilih Merek Kendaraan*",
+                              hintText: "No. Plat*",
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return "Please enter some text";
                                 }
                                 return null;
                               },
-                              items: currendDataMerek
-                          ),
-                          const SizedBox(height: 18),
-                          RFormTextFieldWidget(
-                            onSaved: (value) {
-                              setState(() {
-                                setState(() => reasonReport = value!);
-                              });
-                            },
-                            hintText: "Alasan Melapor*",
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please enter some text";
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 18),
-                          RFormImagePickerWidget(
-                            onSaved: (XFile? value) {
-                              setState(() {
-                                setState(() => image = value!);
-                              });
-                            },
-                            suffixIcon: Icon(Icons.car_crash),
-                            validator: (value) {
-                              if (value == null) {
-                                return "Gambar wajib diisi";
-                              }
-                              return null;
-                            },
-                            hintText: "Upload Foto Kendaraan*",
-                          ),
-                          const SizedBox(height: 18),
-                          RFormTextFieldWidget(
-                            onSaved: (value) {
-                              setState(() {
-                                setState(() => locationReport = value!);
-                              });
-                            },
-                            hintText: "Lokasi Kejadian*",
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please enter some text";
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 18),
-                          Row(
-                            children: [
-                              Flexible(
-                                flex: 5,
-                                fit: FlexFit.tight,
-                                child: RFormTextFieldWidget(
-                                  onSaved: (value) {
-                                    setState(() {
-                                      noPlat = value!;
-                                    });
-                                  },
-                                  hintText: "No. Plat*",
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Please enter some text";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                              Flexible(
-                                flex: 1,
-                                fit: FlexFit.tight,
-                                child: SizedBox(width: 10),
-                              ),
-                              Flexible(
-                                flex: 5,
-                                fit: FlexFit.tight,
-                                child: RFormTextFieldWidget(
-                                  onSaved: (value) {
-                                    setState(() {
-                                      warna = value!;
-                                    });
-                                  },
-                                  hintText: "Warna*",
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Please enter some text";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 18),
-                          RFormTextFieldWidget(
-                            maxLines: 5,
-                            keyboardType: TextInputType.multiline,
-                            onSaved: (value) {
-                              setState(() {
-                                setState(() => detail = value!);
-                              });
-                            },
-                            hintText: "Detail Lainya...*",
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please enter some text";
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 18,),
-                          ElevatedButton(
-                            onPressed: () {
-                              if (_loading == false && _formKey.currentState!.validate()) {
-                                _formKey.currentState!.save();
-                                context.read<ReportBloc>().add(
-                                  ReportEventCreate(
-                                    ReportCreatePayload(
-                                      image: image,
-                                      tipeKendaraan: vehicleRype,
-                                      alasanLaporan: reasonReport,
-                                      detail: detail,
-                                      lokasiKejadian: locationReport,
-                                      merekKendaraan: chooseMerk,
-                                      noPlat: noPlat,
-                                      warna: warna
-                                    )
-                                  )
-                                );
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: primaryColor,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12)
-                                ),
-                                minimumSize: const Size.fromHeight(50)
                             ),
-                            child: _loading == false ? const Text(
-                                "Laporkan",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black54
-                                )
-                            ) : LoadingAnimationWidget.prograssiveDots(
-                                color: Colors.white,
-                                size: 50
+                          ),
+                          Flexible(
+                            flex: 1,
+                            fit: FlexFit.tight,
+                            child: SizedBox(width: 10),
+                          ),
+                          Flexible(
+                            flex: 5,
+                            fit: FlexFit.tight,
+                            child: RFormTextFieldWidget(
+                              onSaved: (value) {
+                                setState(() {
+                                  warna = value!;
+                                });
+                              },
+                              hintText: "Warna*",
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter some text";
+                                }
+                                return null;
+                              },
                             ),
                           ),
                         ],
                       ),
-                    );
+                      const SizedBox(height: 18),
+                      RFormTextFieldWidget(
+                        maxLines: 5,
+                        keyboardType: TextInputType.multiline,
+                        onSaved: (value) {
+                          setState(() {
+                            setState(() => detail = value!);
+                          });
+                        },
+                        hintText: "Detail Lainya (Merek Kendaraan, dll)",
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter some text";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 18,),
+                      ElevatedButton(
+                        onPressed: () {
+
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              alignment: Alignment.center,
+                              title: Text("PERHATIAN!",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w700,
+                                  color: blueColor
+                                ),
+                              ),
+                              content: Container(
+                                height: 250,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Apabila terdapat adanya laporan palsu atau menggangu aktivitas penindakan akan dikenakan Pasal 220 KUHP dengan pidana penjara paling lama satu tahun empat bulan.",
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.inter(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500
+                                      ),
+                                    ),
+                                    const SizedBox(height: 20),
+                                    Text(
+                                      "Pastikan: \n Anda telah berusaha menyelesaikan masalah ini dengan verbal dengan pemilik kendaraan atau petugas parkir dengan baik sebelum melakukan laporan!",
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.inter(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              actions: [
+                                Expanded(
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      "Kembali",
+                                      style: GoogleFonts.inter(
+                                        color: blueColor
+                                      ),
+                                    )
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 3,
+                                  child: TextButton(
+                                      style: ButtonStyle(
+                                        backgroundColor: MaterialStatePropertyAll(primaryColor)
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        "Tetap Melapor",
+                                        style: GoogleFonts.inter(
+                                          color: blueColor
+                                        ),
+                                      )
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+
+                          // if (_loading == false && _formKey.currentState!.validate()) {
+                          //   _formKey.currentState!.save();
+                          //   context.read<ReportBloc>().add(
+                          //     ReportEventCreate(
+                          //       ReportCreatePayload(
+                          //         image: image,
+                          //         tipeKendaraan: vehicleRype,
+                          //         alasanLaporan: reasonReport,
+                          //         detail: detail,
+                          //         lokasiKejadian: locationReport,
+                          //         merekKendaraan: chooseMerk,
+                          //         noPlat: noPlat,
+                          //         warna: warna
+                          //       )
+                          //     )
+                          //   );
+                          // }
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: primaryColor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)
+                            ),
+                            minimumSize: const Size.fromHeight(50)
+                        ),
+                        child: _loading == false ? Text(
+                            "Laporkan",
+                            style: GoogleFonts.inter(
+                              fontWeight: FontWeight.w700,
+                              color: blueColor,
+                              fontSize: 20
+                            )
+                        ) : LoadingAnimationWidget.prograssiveDots(
+                            color: Colors.white,
+                            size: 50
+                        ),
+                      ),
+                    ],
+                  ),
+                );
             },
           ),
         ),

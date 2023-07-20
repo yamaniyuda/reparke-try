@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:reparke/config/theme/theme.dart';
 
 class ReportAboutAsScreen extends StatelessWidget {
   const ReportAboutAsScreen({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class ReportAboutAsScreen extends StatelessWidget {
                 icon: Icon(Icons.arrow_back_rounded)
               ),
               Spacer(),
-              Image.asset("assets/icon.png", width: 30)
+              Image.asset("assets/logo.png", width: 30)
             ],
           ),
         ),
@@ -31,7 +32,8 @@ class ReportAboutAsScreen extends StatelessWidget {
               "Tentang Kami",
               style: GoogleFonts.inter(
                 fontSize: 40,
-                fontWeight: FontWeight.w700
+                fontWeight: FontWeight.w700,
+                color: blueColor
               ),
             ),
             SizedBox(height: 16),

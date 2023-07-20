@@ -22,7 +22,7 @@ class ReportHistoryScreen extends StatelessWidget {
                   icon: Icon(Icons.arrow_back_rounded)
               ),
               Spacer(),
-              Image.asset("assets/icon.png", width: 30)
+              Image.asset("assets/logo.png", width: 30)
             ],
           ),
         ),

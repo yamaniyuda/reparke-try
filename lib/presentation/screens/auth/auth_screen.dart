@@ -67,10 +67,12 @@ class AuthScreen extends StatelessWidget {
                       ),
                       minimumSize: const Size.fromHeight(50)
                     ),
-                    child: const Text(
+                    child: Text(
                       "Login",
-                      style: TextStyle(
-                        color: Colors.black54
+                      style: GoogleFonts.inter(
+                        color: blueColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700
                       )
                     ),
                   ),
@@ -91,10 +93,12 @@ class AuthScreen extends StatelessWidget {
                       ),
                       minimumSize: const Size.fromHeight(50)
                     ),
-                    child: const Text(
+                    child: Text(
                       "Daftar",
-                      style: TextStyle(
-                          color: Colors.black54
+                      style: GoogleFonts.inter(
+                        color: blueColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700
                       )
                     ),
                   ),
